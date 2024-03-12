@@ -7,11 +7,11 @@ import {
   DAI_OPTIMISM_SEPOLIA,
   ITokenListProvider,
   IV2SubgraphProvider,
-  USDC_ARBITRUM_SEPOLIA,
+  USDC_ARBITRUM_SEPOLIA, USDC_FXCORE_TESTNET,
   USDC_OPTIMISM_SEPOLIA,
   USDT_OPTIMISM_SEPOLIA,
   V2SubgraphPool,
-  WBTC_OPTIMISM_SEPOLIA,
+  WBTC_OPTIMISM_SEPOLIA
 } from '../../../providers';
 import {
   CELO,
@@ -185,6 +185,7 @@ const baseTokensByChain: { [chainId in ChainId]?: Token[] } = {
   [ChainId.BNB]: [DAI_BNB, USDC_BNB, USDT_BNB],
   [ChainId.AVALANCHE]: [DAI_AVAX, USDC_AVAX],
   [ChainId.BASE]: [USDC_BASE],
+  [ChainId.FXCORE_TESTNET]: [USDC_FXCORE_TESTNET],
 };
 
 class SubcategorySelectionPools<SubgraphPool> {

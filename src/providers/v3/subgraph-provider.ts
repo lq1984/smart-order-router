@@ -67,6 +67,9 @@ const SUBGRAPH_URL_BY_CHAIN: { [chainId in ChainId]?: string } = {
     'https://api.thegraph.com/subgraphs/name/lynnshaoyu/uniswap-v3-avax',
   [ChainId.BASE]:
     'https://api.studio.thegraph.com/query/48211/uniswap-v3-base/version/latest',
+  // TODO: 填充
+  [ChainId.FXCORE_TESTNET]:
+    'http://127.0.0.1:8000/subgraphs/name/ianlapham/uniswap-v3',
 };
 
 const PAGE_SIZE = 1000; // 1k is max possible query size from subgraph.
@@ -106,6 +109,7 @@ export class V3SubgraphProvider implements IV3SubgraphProvider {
     _tokenOut?: Token,
     providerConfig?: ProviderConfig
   ): Promise<V3SubgraphPool[]> {
+    debugger
     let blockNumber = providerConfig?.blockNumber
       ? await providerConfig.blockNumber
       : undefined;

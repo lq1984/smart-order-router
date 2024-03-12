@@ -24,6 +24,7 @@ export const SUPPORTED_CHAINS: ChainId[] = [
   ChainId.BNB,
   ChainId.AVALANCHE,
   ChainId.BASE,
+  ChainId.FXCORE_TESTNET,
   // Gnosis and Moonbeam don't yet have contracts deployed yet
 ];
 
@@ -98,6 +99,8 @@ export const ID_TO_CHAIN_ID = (id: number): ChainId => {
       return ChainId.BASE;
     case 84531:
       return ChainId.BASE_GOERLI;
+    case 90001:
+      return ChainId.FXCORE_TESTNET;
     default:
       throw new Error(`Unknown chain id: ${id}`);
   }
@@ -123,6 +126,7 @@ export enum ChainName {
   AVALANCHE = 'avalanche-mainnet',
   BASE = 'base-mainnet',
   BASE_GOERLI = 'base-goerli',
+  FXCORE_TESTNET = 'fxcore-testnet',
 }
 
 export enum NativeCurrencyName {
@@ -134,6 +138,7 @@ export enum NativeCurrencyName {
   MOONBEAM = 'GLMR',
   BNB = 'BNB',
   AVALANCHE = 'AVAX',
+  FXCORE_TSETNET = 'FX',
 }
 
 export const NATIVE_NAMES_BY_ID: { [chainId: number]: string[] } = {
@@ -202,6 +207,7 @@ export const NATIVE_NAMES_BY_ID: { [chainId: number]: string[] } = {
     'ETHER',
     '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
   ],
+  [ChainId.FXCORE_TESTNET]: ['FX'],
 };
 
 export const NATIVE_CURRENCY: { [chainId: number]: NativeCurrencyName } = {
@@ -223,6 +229,7 @@ export const NATIVE_CURRENCY: { [chainId: number]: NativeCurrencyName } = {
   [ChainId.BNB]: NativeCurrencyName.BNB,
   [ChainId.AVALANCHE]: NativeCurrencyName.AVALANCHE,
   [ChainId.BASE]: NativeCurrencyName.ETHER,
+  [ChainId.FXCORE_TESTNET]: NativeCurrencyName.FXCORE_TSETNET,
 };
 
 export const ID_TO_NETWORK_NAME = (id: number): ChainName => {
@@ -265,6 +272,8 @@ export const ID_TO_NETWORK_NAME = (id: number): ChainName => {
       return ChainName.BASE;
     case 84531:
       return ChainName.BASE_GOERLI;
+    case 90001:
+      return ChainName.FXCORE_TESTNET;
     default:
       throw new Error(`Unknown chain id: ${id}`);
   }
@@ -308,6 +317,8 @@ export const ID_TO_PROVIDER = (id: ChainId): string => {
       return process.env.JSON_RPC_PROVIDER_AVALANCHE!;
     case ChainId.BASE:
       return process.env.JSON_RPC_PROVIDER_BASE!;
+    case ChainId.FXCORE_TESTNET:
+      return process.env.JSON_RPC_PROVIDER_FXCORE_TESTNET!;
     default:
       throw new Error(`Chain id: ${id} not supported`);
   }
@@ -448,6 +459,13 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId in ChainId]: Token } = {
     18,
     'WETH',
     'Wrapped Ether'
+  ),
+  [ChainId.FXCORE_TESTNET]: new Token(
+    ChainId.FXCORE_TESTNET,
+    '0x5FbDB2315678afecb367f032d93F642f64180aa3',
+    18,
+    'WFX',
+    'Wrapped FX'
   ),
 };
 
@@ -599,6 +617,30 @@ class AvalancheNativeCurrency extends NativeCurrency {
   }
 }
 
+function isFxcoreTestnet(chainId: number): chainId is ChainId.FXCORE_TESTNET {
+  return chainId === ChainId.FXCORE_TESTNET;
+}
+
+class FxCoreTestnetNativeCurrency extends NativeCurrency {
+  equals(other: Currency): boolean {
+    return other.isNative && other.chainId === this.chainId;
+  }
+
+  get wrapped(): Token {
+    if (!isFxcoreTestnet(this.chainId)) throw new Error('Not avalanche');
+    const nativeCurrency = WRAPPED_NATIVE_CURRENCY[this.chainId];
+    if (nativeCurrency) {
+      return nativeCurrency;
+    }
+    throw new Error(`Does not support this chain ${this.chainId}`);
+  }
+
+  public constructor(chainId: number) {
+    if (!isFxcoreTestnet(chainId)) throw new Error('Not fxcore testnet');
+    super(chainId, 18, 'FX', 'FXCORE Testnet');
+  }
+}
+
 export class ExtendedEther extends Ether {
   public get wrapped(): Token {
     if (this.chainId in WRAPPED_NATIVE_CURRENCY) {
@@ -636,6 +678,8 @@ export function nativeOnChain(chainId: number): NativeCurrency {
     cachedNativeCurrency[chainId] = new BnbNativeCurrency(chainId);
   } else if (isAvax(chainId)) {
     cachedNativeCurrency[chainId] = new AvalancheNativeCurrency(chainId);
+  } else if (isFxcoreTestnet(chainId)) {
+    cachedNativeCurrency[chainId] = new FxCoreTestnetNativeCurrency(chainId);
   } else {
     cachedNativeCurrency[chainId] = ExtendedEther.onChain(chainId);
   }

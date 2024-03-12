@@ -33,6 +33,9 @@ export const V3_CORE_FACTORY_ADDRESSES: AddressMap = {
   [ChainId.BASE_GOERLI]:
     CHAIN_TO_ADDRESSES_MAP[ChainId.BASE_GOERLI].v3CoreFactoryAddress,
   [ChainId.BASE]: CHAIN_TO_ADDRESSES_MAP[ChainId.BASE].v3CoreFactoryAddress,
+
+  // TODO: fxcore testnet
+  [ChainId.FXCORE_TESTNET]: CHAIN_TO_ADDRESSES_MAP[ChainId.FXCORE_TESTNET].v3CoreFactoryAddress,
   // TODO: Gnosis + Moonbeam contracts to be deployed
 };
 
@@ -56,6 +59,9 @@ export const QUOTER_V2_ADDRESSES: AddressMap = {
     CHAIN_TO_ADDRESSES_MAP[ChainId.BASE_GOERLI].quoterAddress,
   [ChainId.BASE]: CHAIN_TO_ADDRESSES_MAP[ChainId.BASE].quoterAddress,
   // TODO: Gnosis + Moonbeam contracts to be deployed
+
+  // TODO: fxcore testnet
+  [ChainId.FXCORE_TESTNET]: CHAIN_TO_ADDRESSES_MAP[ChainId.FXCORE_TESTNET].quoterAddress,
 };
 
 export const MIXED_ROUTE_QUOTER_V1_ADDRESSES: AddressMap = {
@@ -86,6 +92,9 @@ export const UNISWAP_MULTICALL_ADDRESSES: AddressMap = {
     CHAIN_TO_ADDRESSES_MAP[ChainId.BASE_GOERLI].multicallAddress,
   [ChainId.BASE]: CHAIN_TO_ADDRESSES_MAP[ChainId.BASE].multicallAddress,
   // TODO: Gnosis + Moonbeam contracts to be deployed
+
+  // TODO: fxcore testnet
+  [ChainId.FXCORE_TESTNET]: CHAIN_TO_ADDRESSES_MAP[ChainId.FXCORE_TESTNET].multicallAddress,
 };
 
 export const SWAP_ROUTER_02_ADDRESSES= (chainId: number): string => {
@@ -130,6 +139,7 @@ export const WETH9: {
     | ChainId.MOONBEAM
     | ChainId.BNB
     | ChainId.AVALANCHE
+    | ChainId.FXCORE_TESTNET
   >]: Token;
 } = {
   [ChainId.MAINNET]: new Token(

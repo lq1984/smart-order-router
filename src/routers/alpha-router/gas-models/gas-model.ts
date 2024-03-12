@@ -29,7 +29,7 @@ import {
   USDC_BNB,
   USDC_BRIDGED_AVAX,
   USDC_CELO,
-  USDC_ETHEREUM_GNOSIS,
+  USDC_ETHEREUM_GNOSIS, USDC_FXCORE_TESTNET,
   USDC_GOERLI,
   USDC_MAINNET,
   USDC_MOONBEAM,
@@ -52,7 +52,7 @@ import {
   USDT_OPTIMISM,
   USDT_OPTIMISM_GOERLI,
   USDT_OPTIMISM_SEPOLIA,
-  WBTC_GOERLI,
+  WBTC_GOERLI
 } from '../../../providers/token-provider';
 import { IV2PoolProvider } from '../../../providers/v2/pool-provider';
 import {
@@ -114,6 +114,8 @@ export const usdGasTokensByChain: { [chainId in ChainId]?: Token[] } = {
     USDC_BRIDGED_AVAX,
   ],
   [ChainId.BASE]: [USDC_BASE, USDC_NATIVE_BASE],
+  [ChainId.BASE]: [USDC_BASE, USDC_NATIVE_BASE],
+  [ChainId.FXCORE_TESTNET]: [USDC_FXCORE_TESTNET],
 };
 
 export type L1ToL2GasCosts = {

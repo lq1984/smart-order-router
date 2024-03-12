@@ -647,6 +647,15 @@ export const WBTC_MOONBEAM = new Token(
   'Wrapped BTC bridged using Multichain'
 );
 
+// FXCORE TESTNET USDC
+export const USDC_FXCORE_TESTNET = new Token(
+  ChainId.FXCORE_TESTNET,
+  '0x9A676e781A523b5d0C0e43731313A708CB607508',
+  18,
+  'USDC',
+  'USDC fxcore coin'
+);
+
 export class TokenProvider implements ITokenProvider {
   constructor(
     private chainId: ChainId,

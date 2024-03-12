@@ -17,6 +17,7 @@ import {
   CachingTokenListProvider,
   CachingTokenProviderWithFallback,
   CachingV3PoolProvider,
+  V3SubgraphProvider,
   CHAIN_IDS_LIST,
   EIP1559GasPriceProvider,
   EthEstimateGasSimulator,

@@ -160,6 +160,11 @@ export const CACHE_SEED_TOKENS: {
     USDC: USDC_BASE,
     WETH: WRAPPED_NATIVE_CURRENCY[ChainId.BASE],
   },
+
+  // TODO: fxcore testnet
+  [ChainId.FXCORE_TESTNET]: {
+    WETH: WRAPPED_NATIVE_CURRENCY[ChainId.FXCORE_TESTNET],
+  },
   // Currently we do not have providers for Moonbeam mainnet or Gnosis testnet
 };
 

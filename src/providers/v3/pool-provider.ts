@@ -153,7 +153,7 @@ export class V3PoolProvider implements IV3PoolProvider {
       ) {
         const [token0, token1, fee] = sortedTokenPairs[i]!;
         invalidPools.push([token0, token1, fee]);
-
+        log.info(`Invalid Pool: ${token0.symbol}/${token1.symbol} slot0Result: ${slot0Result?.success} liquidityResult: ${liquidityResult?.success}`);
         continue;
       }
 
@@ -230,6 +230,7 @@ export class V3PoolProvider implements IV3PoolProvider {
       tokenB: token1,
       fee: feeAmount,
     });
+    console.log(`computePoolAddress: ${token0.symbol}(${token0.address})/${token1.symbol}(${token1.address}) fee: ${feeAmount} address-> ${poolAddress}`);
 
     this.POOL_ADDRESS_CACHE[cacheKey] = poolAddress;
 

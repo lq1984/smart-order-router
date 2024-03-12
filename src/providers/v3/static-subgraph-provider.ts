@@ -161,6 +161,7 @@ const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ],
   [ChainId.BASE_GOERLI]: [WRAPPED_NATIVE_CURRENCY[ChainId.BASE_GOERLI]],
   [ChainId.BASE]: [WRAPPED_NATIVE_CURRENCY[ChainId.BASE], USDC_BASE],
+  [ChainId.FXCORE_TESTNET]: [WRAPPED_NATIVE_CURRENCY[ChainId.FXCORE_TESTNET]],
 };
 
 /**
@@ -185,6 +186,7 @@ export class StaticV3SubgraphProvider implements IV3SubgraphProvider {
     tokenOut?: Token,
     providerConfig?: ProviderConfig
   ): Promise<V3SubgraphPool[]> {
+    debugger
     log.info('In static subgraph provider for V3');
     const bases = BASES_TO_CHECK_TRADES_AGAINST[this.chainId];
 

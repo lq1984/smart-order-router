@@ -277,15 +277,15 @@ export class OnChainQuoteProvider implements IOnChainQuoteProvider {
     },
     protected batchParams: BatchParams = {
       multicallChunk: 150,
-      gasLimitPerCall: 1_000_000,
+      gasLimitPerCall: 10_000_000,
       quoteMinSuccessRate: 0.2,
     },
     protected gasErrorFailureOverride: FailureOverrides = {
-      gasLimitOverride: 1_500_000,
+      gasLimitOverride: 10_500_000,
       multicallChunk: 100,
     },
     protected successRateFailureOverrides: FailureOverrides = {
-      gasLimitOverride: 1_300_000,
+      gasLimitOverride: 10_500_000,
       multicallChunk: 110,
     },
     protected blockNumberConfig: BlockNumberConfig = {
