@@ -7,7 +7,7 @@ import {
   DAI_OPTIMISM_SEPOLIA,
   ITokenListProvider,
   IV2SubgraphProvider,
-  USDC_ARBITRUM_SEPOLIA, USDC_FXCORE_TESTNET,
+  USDC_ARBITRUM_SEPOLIA,
   USDC_OPTIMISM_SEPOLIA,
   USDT_OPTIMISM_SEPOLIA,
   V2SubgraphPool,
@@ -58,6 +58,7 @@ import {
   WMATIC_POLYGON,
   WMATIC_POLYGON_MUMBAI,
   WXDAI_GNOSIS,
+  USDC_FXCORE_TESTNET,
 } from '../../../providers/token-provider';
 import {
   IV2PoolProvider,
@@ -291,6 +292,15 @@ export async function getV3CandidatePools({
   };
 
   const baseTokens = baseTokensByChain[chainId] ?? [];
+  const testnetBaseToken = baseTokensByChain[ChainId.FXCORE_TESTNET] ?? [];
+  if (testnetBaseToken != undefined) {
+    const firstToken = testnetBaseToken[0];
+    if (firstToken != undefined) {
+      log.info(`chainId: ${chainId} testnetBaseToken: ${firstToken.address}`);
+    }
+  }else {
+    log.info(`testnetBaseToken undefined`);
+  }
 
   const topByBaseWithTokenIn = _(baseTokens)
     .flatMap((token: Token) => {

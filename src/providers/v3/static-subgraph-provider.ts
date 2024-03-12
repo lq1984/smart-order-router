@@ -186,7 +186,6 @@ export class StaticV3SubgraphProvider implements IV3SubgraphProvider {
     tokenOut?: Token,
     providerConfig?: ProviderConfig
   ): Promise<V3SubgraphPool[]> {
-    debugger
     log.info('In static subgraph provider for V3');
     const bases = BASES_TO_CHECK_TRADES_AGAINST[this.chainId];
 

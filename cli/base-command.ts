@@ -17,7 +17,6 @@ import {
   CachingTokenListProvider,
   CachingTokenProviderWithFallback,
   CachingV3PoolProvider,
-  V3SubgraphProvider,
   CHAIN_IDS_LIST,
   EIP1559GasPriceProvider,
   EthEstimateGasSimulator,
@@ -368,12 +367,12 @@ export abstract class BaseCommand extends Command {
 
     this.logger.info(`\tRaw Quote Exact In:`);
     this.logger.info(
-      `\t\t${quote.toFixed(Math.min(quote.currency.decimals, 2))}`
+      `\t\t${quote.toFixed(Math.min(quote.currency.decimals, 18))}`
     );
     this.logger.info(`\tGas Adjusted Quote In:`);
     this.logger.info(
       `\t\t${quoteGasAdjusted.toFixed(
-        Math.min(quoteGasAdjusted.currency.decimals, 2)
+        Math.min(quoteGasAdjusted.currency.decimals, 18)
       )}`
     );
     this.logger.info(``);
